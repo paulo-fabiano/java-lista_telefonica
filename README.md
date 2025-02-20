@@ -27,7 +27,7 @@ A entidade **Contato** possui os seguintes atributos:
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/seu-usuario/java-lista-telefonica.git
+   git clone https://github.com/paulo-fabiano/java-lista-telefonica.git
    ```
 2. Acesse o diretório do projeto:
    ```bash
