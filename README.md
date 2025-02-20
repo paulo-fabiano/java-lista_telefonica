@@ -45,13 +45,14 @@ Exemplo de requisição para adicionar um contato:
 ```bash
 curl -X POST "http://localhost:8080/contatos" \
      -H "Content-Type: application/json" \
-     -d '{"nome": "João Silva", "telefone": "(11) 99999-8888", "email": "joao@email.com"}'
+     -d '{"nome": "Paulo Fabiano", "telefone": "(11) 99999-8888", "email": "paulo@email.com"}'
 ```
 
-## 🛠 Futuras Melhorias
-- Implementação de autenticação e autorização
-- Integração com banco de dados PostgreSQL
-- Melhorias nos logs e tratamento de erros
+Exemplo de requisição para listar os contatos:
 
+```bash
+curl "http://localhost:8080/contato/listar
+
+```
 ---
 Desenvolvido por **Paulo Fabiano De Oliveira Filho** 🚀
