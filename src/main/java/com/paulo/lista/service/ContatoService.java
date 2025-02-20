@@ -3,6 +3,7 @@ package com.paulo.lista.service;
 import com.paulo.lista.dto.ContatoDtoRequest;
 import com.paulo.lista.dto.ContatoDtoResponse;
 import com.paulo.lista.entity.Contato;
+import com.paulo.lista.exception.UsuarioNaoExiste;
 import com.paulo.lista.repository.ContatoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -21,20 +22,16 @@ public class ContatoService {
     private ContatoRepository contatoRepository;
 
     public ContatoDtoResponse tranformaEmContatoDtoResponse(Contato contato) {
-
         ContatoDtoResponse contatoDtoResponse = new ContatoDtoResponse(
                 contato.getId(),
                 contato.getNome(),
                 contato.getTelefone(),
                 contato.getTelefone()
         );
-
         return contatoDtoResponse;
-
     }
 
     public Contato tranformaEmContato(ContatoDtoRequest contatoDtoRequest) {
-
         Contato contato = Contato.builder()
                 .nome(contatoDtoRequest.getNome())
                 .telefone(contatoDtoRequest.getTelefone())
@@ -42,7 +39,6 @@ public class ContatoService {
                 .build();
 
         return contato;
-
     };
 
 
@@ -59,23 +55,28 @@ public class ContatoService {
         return contatoRepository.findAll();
     }
 
-    public Contato atualizarContato(Long id, Contato contato) {
+    public Contato atualizarContato(Long id, Contato contato) throws UsuarioNaoExiste {
         Optional<Contato> contatoOptional = contatoRepository.findById(id);
         if(!contatoOptional.isPresent()) {
-            throw new RuntimeException();
+            throw new UsuarioNaoExiste("Não existe usuário com esse ID.");
         }
         Contato c = contatoOptional.get();
+        if (contato.getNome() != null) {
+            c.setNome(contato.getNome());
+        }
+        if (contato.getTelefone() != null) {
+            c.setTelefone(contato.getTelefone());
+        }
+        if (contato.getEmail() != null) {
+            c.setTelefone(contato.getTelefone());
+        }
         return contatoRepository.save(contato);
-        /*
-            Enquanto estudo uma forma de atualizar somente o dado recebido, irei ficar salvando toda a entidade.
-            Por que se só vier o nome eu ainda não sei como alterar somente um atributo.
-         */
     }
 
-    public String deletarContato(Long id) {
+    public String deletarContato(Long id) throws UsuarioNaoExiste {
         Optional<Contato> contatoOptional = contatoRepository.findById(id);
         if (!contatoOptional.isPresent()) {
-            return "Não foi possível localizar o contato pelo Id";
+            throw new UsuarioNaoExiste("Não existe usuário com esse ID.");
         }
         contatoRepository.delete(contatoOptional.get());
         return "Contato deletado com sucesso!";
