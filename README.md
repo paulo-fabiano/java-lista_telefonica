@@ -27,11 +27,11 @@ A entidade **Contato** possui os seguintes atributos:
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/paulo-fabiano/java-lista-telefonica.git
+   git clone https://github.com/paulo-fabiano/java-lista_telefonica.git
    ```
 2. Acesse o diretório do projeto:
    ```bash
-   cd java-lista-telefonica
+   cd java-lista_telefonica
    ```
 3. Compile e execute o projeto usando Maven:
    ```bash
@@ -43,7 +43,7 @@ A API pode ser testada via **Postman**, **Insomnia** ou utilizando `curl` no ter
 
 Exemplo de requisição para adicionar um contato:
 ```bash
-curl -X POST "http://localhost:8080/contatos" \
+curl -X POST "http://localhost:8080/contato/criar" \
      -H "Content-Type: application/json" \
      -d '{"nome": "Paulo Fabiano", "telefone": "(11) 99999-8888", "email": "paulo@email.com"}'
 ```
